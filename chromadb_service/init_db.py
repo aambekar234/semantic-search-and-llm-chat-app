@@ -10,6 +10,8 @@ from chromadb.utils.batch_utils import create_batches
 
 
 class CustomEmbeddingFunction(EmbeddingFunction):
+    """Custom embedding function that uses SentenceTransformer to embed documents."""
+
     def __init__(self, model_name: str):
         self.model = SentenceTransformer(model_name)
 
@@ -41,6 +43,16 @@ def delete_directory(directory_uri):
 
 
 def clone_repository(repo_url, clone_dir):
+    """
+    Clone a repository from the given URL into the specified directory.
+
+    Args:
+        repo_url (str): The URL of the repository to clone.
+        clone_dir (str): The directory where the repository will be cloned.
+
+    Returns:
+        None
+    """
     # Clone the repository
     if os.path.exists(clone_dir):
         print(f"Directory {clone_dir} already exists. Skipping clone.")
@@ -53,6 +65,16 @@ def clone_repository(repo_url, clone_dir):
 
 
 def create_document(row):
+    """
+    Create a vector document from the given row.
+
+    Args:
+        row: A dictionary containing the row data.
+
+    Returns:
+        tuple: A tuple containing the product ID, document, and metadata.
+
+    """
     product_id = row["product_id"]
     document = row["product_title"]
     metadata = {
@@ -67,6 +89,17 @@ def create_document(row):
 
 
 def insert_documents(df, collection_name, emb_fn):
+    """
+    Inserts documents into a collection in the ChromaDB database in batches.
+
+    Args:
+        df (pandas.DataFrame): The DataFrame containing the documents to be inserted.
+        collection_name (str): The name of the collection to insert the documents into.
+        emb_fn : The instance of custom embedding function to use for the documents.
+
+    Returns:
+        None
+    """
     model_name = "multi-qa-mpnet-base-dot-v1"
     client = chromadb.PersistentClient(path=database_dir)
     ef = CustomEmbeddingFunction(model_name)
@@ -90,6 +123,15 @@ def insert_documents(df, collection_name, emb_fn):
 
 
 def process_data(product_dataset_file):
+    """
+    Process the product dataset file and insert the documents into respective collections.
+
+    Args:
+        product_dataset_file (str): The file path of the product dataset.
+
+    Returns:
+        None
+    """
     df = pd.read_parquet(product_dataset_file)
     # Replace NaN values with None
     df = df.fillna("")
@@ -108,6 +150,7 @@ def process_data(product_dataset_file):
 
 
 def main():
+    """main method to initialize the database"""
     start_time = time.time()
     repo_url = "https://github.com/jeancsil/amazon-esci-data.git"
     clone_dir = "amazon-esci-data"
@@ -127,6 +170,7 @@ def main():
     print(f"Total time taken: {total_time} seconds.")
 
 
+# directory where the database will be stored
 database_dir = "./database"
 
 if __name__ == "__main__":
