@@ -12,13 +12,13 @@ For real-world deployment, it is recommended to adopt a distributed vector datab
 This project setup is just the beginning of creating a production-ready chat based application.
 
 ## How to run this project
-Install dependencies.
+Install dependencies (use python >= 3.10).
 You will require to add environment variable CMAKE_ARGS for successful llma-cpp-python installation. For Apple Silicon Macbooks please use below command. Please check official documentation of llma-cpp-python for other platform specific instructions. [link](https://pypi.org/project/llama-cpp-python/)
 
-`CMAKE_ARGS="-DLLAMA_METAL=on"`
-`pip install requirements.txt`
+`CMAKE_ARGS="-DLLAMA_METAL=on"` <br>
+`pip install -r requirements.txt`
 
-Afterwords, in following sequence run below services.
+Afterwords, in following sequence run each service.
 
 ### 1. chromadb_service
 This is a vector database service which creates, modifies and updates dataset entries.
