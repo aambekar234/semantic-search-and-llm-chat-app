@@ -7,19 +7,12 @@ The dataset can be initialized by running init_db.py script first. This process 
 ## How to run the chromadb service?
 There are two ways for running this service
 1. Running the service with precomputed database file (quicker)
-2. Running the service by computing the database on your machine by running init_db.py
+2. Running the service by computing the database on your local machine by running init_db.py. This process should take around 1-2 hours depending upon your maachine configuration. The resulting artifact should be of size 20 GB. 
 
 ## Method 1
 First download the precomputed database.zip file (14GB) from this [link](https://mega.nz/file/NjUklQgA#cizPwg-wSu9zttUdRKGqo_FdQX3f5loLzJN25C77Amc) 
-Unzip the downloaded file in the project directory (chromadb_service). You must have download folder/directory now inside your chromadb-service folder. 
+Unzip the downloaded file in the service project directory (chromadb_service). You must have database folder/directory now inside your chromadb-service folder. 
 Your directory structure should look like this. 
-
-
-## Method 2
-To compute the vectors locally on your machine please run below command. 
-`python init_db.py`
-
-After either methods above your project structure of chromadb_service should look like this
 
 chromadb_service/
 ├── README.md
@@ -29,6 +22,12 @@ chromadb_service/
 ├── database/
 │   └── chroma.sqlite3
 │   └── index_files...
+
+## Method 2
+To compute the vectors locally on your machine please run below command. 
+`python init_db.py`
+
+After either methods above your project structure of chromadb_service should look like this
 
 
 ### Build the docker file
