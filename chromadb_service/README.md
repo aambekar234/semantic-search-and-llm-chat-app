@@ -14,13 +14,14 @@ First download the precomputed database.zip file (14GB) from this [link](https:/
 Unzip the downloaded file in the service project directory (chromadb_service). You must have database folder/directory now inside your chromadb-service folder. 
 Your directory structure should look like this. 
 
+```plaintext
 chromadb_service/
 ├── README.md
-|── Dockerfile
-|── init_db.py
-|── requirements.txt
+├── Dockerfile
+├── init_db.py
+├── requirements.txt
 ├── database/
-│   └── chroma.sqlite3
+│   ├── chroma.sqlite3
 │   └── index_files...
 
 ## Method 2
