@@ -32,17 +32,23 @@ To compute the vectors locally on your machine please run below command.
 `python init_db.py`
 
 
-### Build the docker file
+### Running the service
+
+**It is recommended to run the service without docker to avoid high latencies on local machine** <br>
+Docker run is provided for the cloud deployments. 
+
+`chroma run --path ./database --host 0.0.0.0 --port 8005`
+
+### Docker run
+
+Build the docker file. <br>
 
 `docker build -t chromadb-image .`
 
-### Run the docker container
+Run the docker container <br>
 
 Start the chromadb service on port 8005. <br>
 **Note: It is important to run below command from inside chromadb_service directory to correctly mount the database.**
 
 `docker run -d -p 8005:8000 -v $(pwd)/database:/app/database --name chromadb-service chromadb-image:latest`
 
-### Running the service without docker
-
-`chroma run --path ./database --host 0.0.0.0 --port 8005`
