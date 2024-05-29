@@ -10,7 +10,7 @@ There are two ways for running this service
 2. Running the service by computing the database file on your local machine. This process should take around 1-2 hours depending on your machine configuration. The resulting artifact should be of size 20 GB. 
 
 ## Method 1
-First download the precomputed database.zip file (14GB) from this [link](https://mega.nz/file/NjUklQgA#cizPwg-wSu9zttUdRKGqo_FdQX3f5loLzJN25C77Amc). <br>
+First download the precomputed database.zip file (14GB) from this [link1](https://mega.nz/file/NjUklQgA#cizPwg-wSu9zttUdRKGqo_FdQX3f5loLzJN25C77Amc) [link2](https://drive.google.com/file/d/1SP-UUoGauKcN4HTWKUYQbRB_FQEU7gu9/view?usp=drive_link).  <br>
 Unzip the downloaded file in the service project directory (chromadb_service). You must have database folder/directory now inside your chromadb-service folder. 
 Your directory structure should look like this. 
 
