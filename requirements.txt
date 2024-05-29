@@ -3,7 +3,7 @@ requests
 GitPython
 git-lfs
 streamlit==1.32.2
-python-dotenv==0.8.2
+python-dotenv
 langchain==0.2.1
 langchain-community==0.2.1
 sentence-transformers==2.7.0
