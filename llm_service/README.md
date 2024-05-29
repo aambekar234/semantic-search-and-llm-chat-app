@@ -11,11 +11,23 @@ For handling multiple users simultaneosly and provide seamless chat experience t
 Download the llm model first by running download_model.py script <br>
 `python download_model.py`
 
+### Running the service locally
+
+**It is recommended to run the service without docker to avoid high latencies on local machine** <br>
+Docker run is provided for the cloud deployments. 
+
+make sure you are in correcr dir <br>
+`cd llm_service`
+run the service <br>
+`uvicorn app.main:app --host 0.0.0.0 --port 8001`
+
+### Docker run
+
 Build Docker file <br>
 `docker build -t llm-service-image .`
  
 Run docker container <br>
-**Note: It is important to run below command from inside llm_service directory to correctly mount the model directory.** <br>
+**Note: It is important to run below command from within the llm_service directory to correctly mount the model directory.** <br>
 
 `docker run -d -p 8001:8000 -v $(pwd)/model:/llm_service/model --name llm-service llm-service-image:latest`
 
