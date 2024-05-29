@@ -23,6 +23,7 @@ chromadb_service/
 ├── database/
 │   ├── chroma.sqlite3
 │   └── index_files...
+```
 
 ## Method 2
 To compute the vectors locally on your machine please run below command. 
