@@ -38,8 +38,8 @@ After either methods above your project structure of chromadb_service should loo
 
 ### Run the docker container
 
-start the chromadb service on port 8005. 
-Note: It is important to run below command from inside chromadb_service directory to correctly mount the database. 
+Start the chromadb service on port 8005. <br>
+**Note: It is important to run below command from inside chromadb_service directory to correctly mount the database.**
 
 `docker run -d -p 8005:8000 -v $(pwd)/database:/app/database --name chromadb-service chromadb-image:latest`
 
