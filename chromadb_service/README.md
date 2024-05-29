@@ -27,9 +27,8 @@ chromadb_service/
 
 ## Method 2
 To compute the vectors locally on your machine please run below command. 
-`python init_db.py`
 
-After either methods above your project structure of chromadb_service should look like this
+`python init_db.py`
 
 
 ### Build the docker file
