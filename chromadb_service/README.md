@@ -7,10 +7,10 @@ The dataset can be initialized by running init_db.py script first. This process 
 ## How to run the chromadb service?
 There are two ways for running this service
 1. Running the service with precomputed database file (quicker)
-2. Running the service by computing the database on your local machine by running init_db.py. This process should take around 1-2 hours depending upon your maachine configuration. The resulting artifact should be of size 20 GB. 
+2. Running the service by computing the database file on your local machine. This process should take around 1-2 hours depending on your machine configuration. The resulting artifact should be of size 20 GB. 
 
 ## Method 1
-First download the precomputed database.zip file (14GB) from this [link](https://mega.nz/file/NjUklQgA#cizPwg-wSu9zttUdRKGqo_FdQX3f5loLzJN25C77Amc) 
+First download the precomputed database.zip file (14GB) from this [link](https://mega.nz/file/NjUklQgA#cizPwg-wSu9zttUdRKGqo_FdQX3f5loLzJN25C77Amc). <br>
 Unzip the downloaded file in the service project directory (chromadb_service). You must have database folder/directory now inside your chromadb-service folder. 
 Your directory structure should look like this. 
 
@@ -22,7 +22,7 @@ chromadb_service/
 ├── requirements.txt
 ├── database/
 │   ├── chroma.sqlite3
-│   └── index_files...
+│   └── indexing_files...
 ```
 
 ## Method 2
