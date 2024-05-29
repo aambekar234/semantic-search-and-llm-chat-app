@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+requests
+llama-cpp-python
+langchain==0.2.1
+langchain-community==0.2.1
+sentence-transformers==2.7.0
+chromadb-client
+cachetools
+python-dotenv
