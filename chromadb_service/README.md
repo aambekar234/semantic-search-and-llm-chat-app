@@ -26,6 +26,7 @@ chromadb_service/
 ```
 
 ## Method 2
+Skip this step if you have followed the method 1. 
 To compute the vectors locally on your machine please run below command. 
 
 `python init_db.py`

@@ -9,3 +9,4 @@ langchain-community==0.2.1
 sentence-transformers==2.7.0
 websockets
 llama-cpp-python
+tqdm
