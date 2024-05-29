@@ -8,17 +8,19 @@ class LLM_Service_Interface:
         self.session_id = session_id
         self.chat_interface_url = chat_interface_url
 
-    def chat(self, user_query):
-        url = f"{self.chat_interface_url}"
-        data = {"text": user_query}
-        response = requests.post(url, json=data)
-
-        if response.status_code == 200:
-            return response.json().get("response")
-        else:
-            return f"Error: {response.status_code}, {response.text}"
-
     async def chat_ws(self, user_query, locale, st):
+        """
+        Establishes a WebSocket connection to the chat interface and sends user queries.
+
+        Args:
+            user_query (str): The user's query.
+            locale (str): The locale for the chat interface. This changes the db-collections used for search at backend.
+            st: The Streamlit object for displaying output.
+
+        Returns:
+            str: The response received from the chat interface.
+        """
+
         url = f"{self.chat_interface_url}"
         response = ""
         async with websockets.connect(url) as websocket:

@@ -5,11 +5,15 @@ import requests
 import pandas as pd
 import time
 
+# set page related configurations
 st.set_page_config(
     page_title="LLM-RAG-DEMO",
     page_icon="🧊",
 )
 st.title("🔍 Semantic Product Search")
+
+
+# llm_service search api endpoint
 API_URL = "http://127.0.0.1:8001/search"
 query = st.text_input("Enter your search query:")
 

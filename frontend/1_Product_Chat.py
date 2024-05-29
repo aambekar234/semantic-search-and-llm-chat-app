@@ -5,6 +5,7 @@ from services import LLM_Service_Interface
 import asyncio
 import uuid
 
+# set page related configurations
 st.set_option("client.showErrorDetails", False)
 st.set_page_config(
     page_title="LLM-RAG-DEMO",
@@ -12,12 +13,13 @@ st.set_page_config(
 )
 st.title("🤖 Product Chat Bot")
 
-default_response = "Hello! I am a product chat bot. Ask me anything about products."
+default_response = "Hello! I am a chatbot to assist you with inquiries realted to our products. How can I help you today?"
 
 # generate user session
 if "user_session_id" not in st.session_state:
     st.session_state["user_session_id"] = uuid.uuid4().hex
 
+# initialize llm service interface
 llm_service = LLM_Service_Interface(st.session_state["user_session_id"])
 
 
@@ -36,6 +38,7 @@ async def render_content():
 
     st.sidebar.write("User Session ID: ", st.session_state["user_session_id"])
     locale = st.sidebar.selectbox("Select Locale", ["us", "es", "jp"])
+
     # React to user input
     if prompt := st.chat_input("Ask Product Specific Questions"):
         # Display user message in chat message container
