@@ -1,24 +1,24 @@
 # LLM Service
-This service is a FAST API REST service application. This application is intended to provide chat interface for the frontend application. This service also provides semantic search endpoint for document retrival based for user query context. 
+This service is a FAST API application intended to provide chat interface and semantic search for the frontend application. 
 
-This service relies on chromadb service for document/context retrival. You must first run the chroma docker container before starting this service. 
+This service relies on chromadb service for document/context retrival. You must first run the chroma service before running this service. 
 
-For the chatbased interaction LLAMA-2 7B model is used in conjunction with lanchain framework. The chat agent implemetes context retriver for document context retriever and also the langchain's BufferMemory to keep track of individual user interactions. 
-For handling multiple users simultaneosly and provide seamless chat experience this service uses websockets for the user communication. Distinct instances for each user websockets are managed and maintanied in the memory. 
+For the chatbase interaction LLAMA-2-7B model is used in conjunction with langchain framework. The chat agent implements document-retriever and langchain's BufferMemory to provide conversational context to the LLM model. 
+For handling multiple users simultaneosly and provide seamless chat experience this service uses websockets. Distinct instances of each user websockets are managed and maintanied in the memory to achieve this. 
 
-## How to run this service?
-install dependencies by running below commands
-`ENV CMAKE_ARGS="-DLLAMA_METAL=on"`
-`ENV FORCE_CMAKE=1`
-`pip install requirements.txt`
+## How to run the llm-service?
 
-Download llm model by running download_model.py script
+Download the llm model first by running download_model.py script
 `python download_model.py`
 
 Build Docker file
 `docker build -t llm-service-image .`
 
-Run docker container. 
+Run docker container
+Note: It is important to run below command from inside llm_service directory to correctly mount the model directory. 
+
 `docker run -d -p 8001:8000 -v $(pwd)/model:/llm_service/model --name llm-service llm-service-image:latest`
 
+Running the service without docker
 
+`uvicorn app.main:app --host 0.0.0.0 --port 8001`

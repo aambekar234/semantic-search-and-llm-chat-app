@@ -1,42 +1,47 @@
 # Chromadb Service
-Chromadb service is a vectorestore database. The database contains the amazon esci dataset. The product titles are converted into embeddings and product object is saved as a metadata for every row. 
+Chromadb service is a vectorestore database service which uses [amazon-esci](https://github.com/amazon-science/esci-data) product dataset as source. The product titles are converted into vector-embeddings and product object is saved as a metadata for every row. Separate collection is made for each product locale in the dataset. 
 
-The embeddings are calculated using sentence-transformer library and using `multi-qa-mpnet-base-dot-v1` model.
+The embedding vectors are computed using sentence-transformer library and using `multi-qa-mpnet-base-dot-v1` model.
 The dataset can be initialized by running init_db.py script first. This process takes around 1-2 hours as the orginal dataset has around 2 million rows. 
 
-## How to run the chromadb service
+## How to run the chromadb service?
 There are two ways for running this service
 1. Running the service with precomputed database file (quicker)
-2. Running the service by computing the database file by using init_db.py
+2. Running the service by computing the database on your machine by running init_db.py
 
 ## Method 1
-For quickly running the app use git-lfs to download precomputed database files. Once done use following command to stitch back the database files together.
-`cd precomputed_database`
-`cat database-part-* > database.zip`
+First download the precomputed database.zip file (14GB) from this [link](https://mega.nz/file/NjUklQgA#cizPwg-wSu9zttUdRKGqo_FdQX3f5loLzJN25C77Amc) 
+Unzip the downloaded file in the project directory (chromadb_service). You must have download folder/directory now inside your chromadb-service folder. 
+Your directory structure should look like this. 
 
-Once done, unzip the database.zip file
-
-### Build the docker file
-
-build docker file
-`docker build -t chromadb-image .`
-
-### Run the docker container
-
-start the chromadb service on port 8001
-`docker run -d -p 8005:8000 -v $(pwd)/precomputed_database/database:/app/database --name chromadb-service chromadb-image:latest`
 
 ## Method 2
-First install the dependencies from the parent requirements.txt file
-`pip install -r requirements.txt`
-
-Then run init_db.py
+To compute the vectors locally on your machine please run below command. 
 `python init_db.py`
 
+After either methods above your project structure of chromadb_service should look like this
+
+chromadb_service/
+├── README.md
+|── Dockerfile
+|── init_db.py
+|── requirements.txt
+├── database/
+│   └── chroma.sqlite3
+│   └── index_files...
+
+
 ### Build the docker file
-build docker file
 
 `docker build -t chromadb-image .`
 
 ### Run the docker container
+
+start the chromadb service on port 8005. 
+Note: It is important to run below command from inside chromadb_service directory to correctly mount the database. 
+
 `docker run -d -p 8005:8000 -v $(pwd)/database:/app/database --name chromadb-service chromadb-image:latest`
+
+### Running the service without docker
+
+`chroma run --path ./database --host 0.0.0.0 --port 8005`
