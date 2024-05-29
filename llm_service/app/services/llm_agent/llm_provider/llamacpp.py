@@ -10,6 +10,9 @@ from langchain_core.runnables import RunnableLambda, RunnablePassthrough
 
 
 class LlamaCpp_Provider:
+    """LlamaCpp provider class for chat interaction.
+    This class orchestrates the RAG and prompt templates for the chat interaction."""
+
     def __init__(self):
         try:
             self.model = None
@@ -25,6 +28,22 @@ class LlamaCpp_Provider:
             raise Exception("Model path not found in environment variables")
 
     def _load_model(self):
+        """
+        Loads the LlamaCpp model with the specified parameters.
+
+        Parameters:
+        - model_path (str): The path to the model.
+        - n_gpu_layers (int): The number of GPU layers.
+        - n_batch (int): The batch size.
+        - n_ctx (int): The context size.
+        - temperature (float): The temperature for sampling.
+        - f16_kv (bool): Whether to use float16 for key-value tensors.
+        - callback_manager (CallbackManager): The callback manager.
+        - verbose (bool): Whether to enable verbose mode.
+
+        Returns:
+        - None
+        """
         self.model = LlamaCpp(
             model_path=self._get_model_path(),
             n_gpu_layers=1,
@@ -37,6 +56,7 @@ class LlamaCpp_Provider:
         )
 
     def _get_prompt_rag_template(self):
+        """Returns the prompt template for the RAG specifc chain."""
 
         template_str = """<s>[INST] <<SYS>>
         You are an AI assistant chatbot for a online store customer service. You answer professional user questions about products and services.
@@ -58,6 +78,7 @@ class LlamaCpp_Provider:
         return prompt
 
     def _get_prompt_chat_template(self):
+        """Returns the prompt template for the regular chat specific chain."""
 
         template_str = """<s>[INST] <<SYS>>
         You are an AI assistant chatbot for a online store customer service. You answer professional user questions about products and services.
@@ -80,6 +101,21 @@ class LlamaCpp_Provider:
         return prompt
 
     async def chat(self, user_question: str, memory, websocket=None):
+        """
+        Perform a chat interaction LLM.
+
+        Args:
+            user_question (str): The user's question or input.
+            context: The context information for the conversation.
+            memory: The memory information for the conversation.
+            websocket: (optional) The WebSocket connection for streaming responses.
+
+        Returns:
+            The response from the LLM.
+
+        Raises:
+            Any exceptions that occur during the chat interaction.
+        """
 
         chat_pipeline = self._get_chat_pipeline(memory)
         if websocket is None:
@@ -96,6 +132,21 @@ class LlamaCpp_Provider:
         memory,
         websocket=None,
     ):
+        """
+        Perform a chat interaction LLM using RAG pipeline.
+
+        Args:
+            user_question (str): The user's question or input.
+            context: The context information for the conversation.
+            memory: The memory information for the conversation.
+            websocket: (optional) The WebSocket connection for streaming responses.
+
+        Returns:
+            The response from the LLM.
+
+        Raises:
+            Any exceptions that occur during the chat interaction.
+        """
         rag_pipeline = self._get_rag_pipeline(context, memory)
         if websocket is None:
             return await rag_pipeline.ainvoke(user_question)
@@ -105,6 +156,18 @@ class LlamaCpp_Provider:
             )
 
     async def _stream_response(self, llm, query, context, websocket):
+        """
+        Stream the response from the llm to the websocket.
+
+        Args:
+            llm (LLM): The LLM provider object. This can be either the chat or rag pipeline.
+            query (str): The query to be sent to the llm.
+            context (str): The context to be included in the response.
+            websocket (WebSocket): The websocket to send the response to.
+
+        Returns:
+            str: The complete response from the LLM.
+        """
         chunk_response = ""
         response = ""
 

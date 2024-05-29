@@ -21,7 +21,7 @@ llm_agent = LLM_Agent(db_service)
 
 @app.get("/")
 async def read_root():
-    return {"message": "Welcome to the LlamaCpp FastAPI service"}
+    return {"message": "Welcome to the llm_service API!"}
 
 
 @app.post("/search/", response_model=list[ProductSchema])

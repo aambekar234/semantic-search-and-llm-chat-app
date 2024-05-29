@@ -7,6 +7,8 @@ from chromadb import Documents, EmbeddingFunction, Embeddings
 
 
 class CustomEmbeddingFunction(EmbeddingFunction):
+    """Custom embedding function that uses SentenceTransformer to embed documents."""
+
     def __init__(self, model):
         self.model = model
 
@@ -15,6 +17,8 @@ class CustomEmbeddingFunction(EmbeddingFunction):
 
 
 class DefChromaEF(Embeddings):
+    """Default Chroma Embedding Function wrapper for CustomEmbeddingFunction."""
+
     def __init__(self, ef):
         self.ef = ef
 
