@@ -1,7 +1,7 @@
 # LLM Service
 This service is a FAST API application intended to provide chat interface and semantic search for the frontend application. 
 
-This service relies on chromadb service for document/context retrival. You must first run the chroma service before running this service. 
+This service relies on chromadb service for document/context retrival. You must first run the chromadb_service before attempting to run this one. 
 
 For the chatbase interaction LLAMA-2-7B model is used in conjunction with langchain framework. The chat agent implements document-retriever and langchain's BufferMemory to provide conversational context to the LLM model. 
 For handling multiple users simultaneosly and provide seamless chat experience this service uses websockets. Distinct instances of each user websockets are managed and maintanied in the memory to achieve this. 
