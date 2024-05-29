@@ -1,15 +1,23 @@
-"""Script to download the llm model from the specified URL."""
-
 import os
 from dotenv import load_dotenv, find_dotenv
 
 _ = load_dotenv(".env")
-
 import requests
 import sys
 
 
 def download_model(model_url, destination):
+    """
+    Downloads a model from the given URL and saves it to the specified destination.
+
+    Args:
+        model_url (str): The URL of the model to download.
+        destination (str): The path where the downloaded model should be saved.
+
+    Raises:
+        SystemExit: If the model download is incomplete.
+
+    """
     response = requests.get(model_url, stream=True)
     total_size = int(response.headers.get("content-length", 0))
     block_size = 1024  # 1 Kilobyte
