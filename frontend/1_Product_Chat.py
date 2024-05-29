@@ -13,7 +13,7 @@ st.set_page_config(
 )
 st.title("🤖 Product Chat Bot")
 
-default_response = "Hello! I am a chatbot to assist you with inquiries realted to our products. How can I help you today?"
+default_response = "Hello! I am a chatbot to assist you with inquiries related to our products. How can I help you today?"
 
 # generate user session
 if "user_session_id" not in st.session_state:

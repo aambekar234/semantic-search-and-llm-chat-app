@@ -29,7 +29,7 @@ This API service is powered by the llama-2-7B model for the chat interface and u
 Follow these instructions [here](./llm_service/README.md)
 
 ### 3. frontend
-This is a froentend application (streamlit) which relies on llm_service  to make chat-bot and semantic search work.
+This is a frontend application (streamlit) which relies on llm_service to power chatbot and semantic-search features.
 
 To start the frontend app run below command.
 
