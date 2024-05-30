@@ -100,7 +100,7 @@ def insert_documents(df, collection_name, emb_fn):
     Returns:
         None
     """
-    model_name = "multi-qa-mpnet-base-dot-v1"
+    model_name = "multi-qa-mpnet-base-cos-v1"
     client = chromadb.PersistentClient(path=database_dir)
     ef = CustomEmbeddingFunction(model_name)
 
