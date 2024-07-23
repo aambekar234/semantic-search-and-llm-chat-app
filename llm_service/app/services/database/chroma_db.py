@@ -142,7 +142,7 @@ class DB_Service:
 
         return formatted_docs
 
-    def get_retriever(self, locale: str, filter=None):
+    def get_retriever(self, locale: str, filter=None, k=5):
         """
         Creates a retriever object for the specified locale with an optional filter.
 
@@ -164,7 +164,7 @@ class DB_Service:
             )
             if filter:
                 return db.as_retriever(search_kwargs={"k": 1, "filter": filter})
-            return db.as_retriever(search_type="similarity", search_kwargs={"k": 5})
+            return db.as_retriever(search_type="similarity", search_kwargs={"k": k})
         except Exception as e:
             print(f"Error creating retriever: {e}")
             raise RuntimeError("Error creating retriever")

@@ -30,7 +30,7 @@ async def search(query: Search_Schema):
     try:
         text = query.text
         locale = query.locale
-        retriever = db_service.get_retriever(locale)
+        retriever = db_service.get_retriever(locale, k=10)
         documents = retriever.invoke(text)
         docs = [doc.metadata for doc in documents]
         return docs

@@ -34,19 +34,21 @@ if st.button("Search"):
             df = pd.DataFrame(products)
 
             # Display the results in a table
-            st.write(f"Query took {total_time:.3f} seconds. Top 5 Search Results:")
+            st.write(f"Query took {total_time:.3f} seconds. Top 10 Search Results:")
 
             # Construct and display the markdown for each product
             for _, row in df.iterrows():
 
                 product_markdown = f"#### Title: {row['product_title']}\n"
                 product_markdown += f"##### Product ID: {row['product_id']}\n"
-                product_markdown += (
-                    f"###### Description: {row['product_description']}\n"
-                )
-                product_markdown += f"###### Features: {row['product_bullet_point']}\n"
-                product_markdown += f"###### Brand: {row['product_brand']}\n"
-                product_markdown += f"###### Color: {row['product_color']}\n"
+                if row["product_bullet_point"]:
+                    product_markdown += (
+                        f"###### Features: {row['product_bullet_point']}\n"
+                    )
+                if row["product_brand"]:
+                    product_markdown += f"###### Brand: {row['product_brand']}\n"
+                if row["product_color"]:
+                    product_markdown += f"###### Color: {row['product_color']}\n"
                 st.markdown(product_markdown)
                 st.markdown("---")
         else:
